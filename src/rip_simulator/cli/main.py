@@ -7,7 +7,7 @@ the Routing Information Protocol (RIP).
 
 import argparse
 import sys
-
+from rip_simulator.simulation.topology_loader import load_topology
 
 def simulate(topology_path: str) -> None:
     """
@@ -17,8 +17,8 @@ def simulate(topology_path: str) -> None:
         topology_path (str): Path to the topology JSON file.
     """
     print(f"[simulate] Running simulation using topology file: {topology_path}")
-    # TODO: Load topology and invoke Simulator class
-
+    sim = load_topology(topology_path)
+    sim.run(rounds=5)
 
 def build_parser() -> argparse.ArgumentParser:
     """
