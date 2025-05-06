@@ -46,12 +46,17 @@ class Simulator:
 
             # Step 2: Deliver updates to neighbors
             for router_id, router in self.routers.items():
-                for neighbor_id in self.neighbor_map[router_id]:
+                for neighbor_id in router.neighbors:
                     if neighbor_id in self.routers:
                         router.receive_update(
                             from_router=neighbor_id,
                             update_table=updates[neighbor_id]
                         )
+
+            # Step 3: Print routing tables
+            print(f"\n[simulator] Routing tables after round {step}:\n")
+            for router in self.routers.values():
+                router.print_table()
 
         print("\n[simulator] Final routing tables:\n")
         for router in self.routers.values():
